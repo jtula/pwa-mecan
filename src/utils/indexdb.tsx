@@ -1,8 +1,6 @@
 //credits to: https://js.plainenglish.io/working-with-indexeddb-in-typescript-react-ad504a1bdae3
-
-import {DATABASE} from "../constants";
-
 import { IDBPDatabase, openDB } from 'idb';
+import { DATABASE } from "src/constants";
 
 class IndexedDb {
     private database: string;
@@ -33,23 +31,20 @@ class IndexedDb {
         const tx = this.db.transaction(tableName, 'readonly');
         const store = tx.objectStore(tableName);
         const result = await store.get(id);
-        console.log('Get Data ', JSON.stringify(result));
         return result;
     }
-
+    
     public async getAllValue(tableName: string) {
         const tx = this.db.transaction(tableName, 'readonly');
         const store = tx.objectStore(tableName);
         const result = await store.getAll();
-        console.log('Get All Data', JSON.stringify(result));
-        return result;
+        return result || [];
     }
 
     public async putValue(tableName: string, value: object) {
         const tx = this.db.transaction(tableName, 'readwrite');
         const store = tx.objectStore(tableName);
         const result = await store.put(value);
-        console.log('Put Data ', JSON.stringify(result));
         return result;
     }
 
@@ -58,7 +53,6 @@ class IndexedDb {
         const store = tx.objectStore(tableName);
         for (const value of values) {
             const result = await store.put(value);
-            console.log('Put Bulk Data ', JSON.stringify(result));
         }
         return this.getAllValue(tableName);
     }
@@ -68,15 +62,13 @@ class IndexedDb {
         const store = tx.objectStore(tableName);
         const result = await store.get(id);
         if (!result) {
-            console.log('Id not found', id);
             return result;
         }
         await store.delete(id);
-        console.log('Deleted Data', id);
         return id;
     }
 }
 
-const indexedDb = new IndexedDb(DATABASE)
+const indexedDb = new IndexedDb(DATABASE);
 
 export default indexedDb;
