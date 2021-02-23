@@ -21,8 +21,7 @@ export const getUsers = () => {
   return indexedDb.getAllValue(OBJECT_STORE_USERS).then((response) => response);
 };
 
-export const deleteUser = async (username) => {
-  const users = await get("users");
-  const filteredUsers = users.filter((user) => user.username !== username);
-  return set("users", filteredUsers).then(() => "ok");
+export const deleteUser = async (id) => {
+  await indexedDb.deleteValue(OBJECT_STORE_USERS, id);
+  return "ok";
 };

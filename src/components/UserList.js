@@ -14,7 +14,7 @@ const UserList = ({ users, handleDeleteUser }) => {
         >
           <span className="flex-1">{user.username}</span>
           <button
-            onClick={() => handleDeleteUser(user.username)}
+            onClick={() => handleDeleteUser(user.id)}
             className="inline-flex items-center justify-center w-15 h-15 rounded-full"
           >
             <TrashIcon width={15} height={15} />
