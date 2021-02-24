@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import Context from "src/context/UserContext";
-import login from "src/services/";
+import { login } from "src/services/users";
 
 export default function useUser() {
   const { user, setUser } = useContext(Context);
@@ -8,19 +8,17 @@ export default function useUser() {
   const [userError, setUserError] = useState(false);
 
   const loginUser = useCallback(
-    ({ username }) => {
+    (id) => {
       setLoadingUser(true);
-      login({ username })
+      login(id)
         .then((response) => {
           setLoadingUser(false);
           setUserError(false);
-          setUser(response.user);
-          window.sessionStorage.setItem(
-            "username",
-            JSON.stringify(response.user)
-          );
+          setUser(response);
+          window.sessionStorage.setItem("username", JSON.stringify(response));
         })
         .catch((err) => {
+          console.error(err);
           window.sessionStorage.removeItem("username");
           setLoadingUser(false);
           setUserError(true);
@@ -30,7 +28,7 @@ export default function useUser() {
   );
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem("user");
+    window.sessionStorage.removeItem("username");
     setUser(null);
   }, [setUser]);
 
