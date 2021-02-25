@@ -68,11 +68,18 @@ const Profile = () => {
               aria-labelledby="user-menu"
             >
               <a
+                href="/profile"
+                className="font-medium uppercase block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                role="menuitem"
+              >
+                Perfil
+              </a>
+              <a
                 href="/"
                 className="font-medium uppercase block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
               >
-                SALIR
+                Salir
               </a>
             </div>
           )}
