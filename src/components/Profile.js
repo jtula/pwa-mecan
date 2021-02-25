@@ -20,7 +20,7 @@ const Profile = () => {
 
       <div className="flex-grow"></div>
       <div>
-        <div className="flex items-center">
+        <div className="flex items-center shadow-sm rounded-md p-2">
           <button
             className="max-w-xs rounded-full flex items-center text-sm focus:outline-none space-x-2"
             id="user-menu"
