@@ -1,11 +1,12 @@
 import React from "react";
 import useUser from "src/hooks/useUser";
+import MainLayout from "src/layouts/MainLayout";
 import Login from "./login";
 
 const Home = () => {
-  const { user, loadingUser, userError, loginUser } = useUser();
+  const { user } = useUser();
 
-  return <>{user ? user.username : <Login />}</>;
+  return <>{user ? <MainLayout /> : <Login key="login" />}</>;
 };
 
 export default Home;

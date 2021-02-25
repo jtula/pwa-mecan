@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Profile from "src/components/Profile";
 import NavBar from "./NavBar";
 
 export default function AppLayout({ children }) {
@@ -8,8 +9,10 @@ export default function AppLayout({ children }) {
     <>
       <div>
         <NavBar />
-        <header className="bg-white shadow"></header>
-        <main className="container mx-auto p-4">{children}</main>
+        <header className="flex align-items mx-12 p-4">
+          <Profile />
+        </header>
+        <main className="container-lg mx-12 p-4">{children}</main>
       </div>
     </>
   );
