@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import indexedDb from "src/utils/indexdb";
-import MainLayout from "src/layouts/MainLayout";
+import { UserContextProvider } from "src/context/UserContext";
+import { Route, Switch } from "wouter";
 import Home from "src/pages/Home";
 import {
   OBJECT_STORE_USERS,
@@ -28,11 +29,13 @@ function App() {
   if (loading) return null;
 
   return (
-    <div className="App">
-      <MainLayout>
-        <Home />
-      </MainLayout>
-    </div>
+    <UserContextProvider>
+      <div className="App">
+        <Switch>
+          <Route component={Home} path="/" />
+        </Switch>
+      </div>
+    </UserContextProvider>
   );
 }
 
