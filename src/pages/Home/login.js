@@ -10,7 +10,7 @@ const Login = () => {
   const [users, setUsers] = useState([]);
   const [reload, setReload] = useState(false);
   const [registerError, setRegisterError] = useState("");
-  const { user, loadingUser, userError, loginUser } = useUser();
+  const { loginUser } = useUser();
 
   useEffect(() => {
     getUsers().then(setUsers);
