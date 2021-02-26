@@ -12,7 +12,10 @@ const UserList = ({ users, handleLogin, handleDeleteUser }) => {
           className="flex p-3 rounded-md hover:bg-gray-200 items-center "
           key={idx}
         >
-          <span onClick={() => handleLogin(user.id)} className="flex-1">
+          <span
+            onClick={() => handleLogin(user.id)}
+            className="flex-1 cursor-pointer"
+          >
             {user.username}
           </span>
           <button
