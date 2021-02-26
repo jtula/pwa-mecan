@@ -3,21 +3,11 @@ import { Transition } from "@headlessui/react";
 import useUser from "src/hooks/useUser";
 
 const Profile = () => {
-  const { user } = useUser();
+  const { user, logout } = useUser();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   return (
     <>
-      {/* <div className="flex-grow"></div>
-      <div className="flex">
-        <img
-          className="w-10 h-10 rounded-full"
-          alt="profile"
-          src="avatar.png"
-        />
-        <span>{user.username}</span>
-      </div> */}
-
       <div className="flex-grow"></div>
       <div>
         <div className="flex items-center shadow-sm rounded-md p-2">
@@ -33,13 +23,15 @@ const Profile = () => {
               src="avatar.png"
               alt="profile"
             />
-            <span className="font-medium uppercase">{user.username}</span>
+            <span className="font-medium uppercase hidden sm:block">
+              {user.username}
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 20 20"
               stroke="currentColor"
-              className="h-3 w-3 text-gray-700"
+              className="h-3 w-3 text-gray-700 hidden sm:block"
             >
               <path
                 strokeLinecap="round"
@@ -74,13 +66,12 @@ const Profile = () => {
               >
                 Perfil
               </a>
-              <a
-                href="/"
-                className="font-medium uppercase block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                role="menuitem"
+              <button
+                className="font-medium text-left w-full uppercase block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-0"
+                onClick={logout}
               >
                 Salir
-              </a>
+              </button>
             </div>
           )}
         </Transition>
