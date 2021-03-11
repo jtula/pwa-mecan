@@ -3,6 +3,7 @@ import indexedDb from "src/utils/indexdb";
 import { UserContextProvider } from "src/context/UserContext";
 import { Route, Switch } from "wouter";
 import Home from "src/pages/Home";
+import Incomes from "src/pages/Incomes";
 import {
   OBJECT_STORE_USERS,
   OBJECT_STORE_INCOMES,
@@ -33,6 +34,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route component={Home} path="/" />
+          <Route component={Incomes} path="/incomes" />
         </Switch>
       </div>
     </UserContextProvider>
