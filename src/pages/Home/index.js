@@ -1,7 +1,7 @@
 import React from "react";
 import useUser from "src/hooks/useUser";
 import MainLayout from "src/layouts/MainLayout";
-import Login from "./login";
+import Login from "../Login";
 
 const Home = () => {
   const { user } = useUser();
