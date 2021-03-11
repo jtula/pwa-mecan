@@ -10,12 +10,12 @@ export default function AppLayout({ children }) {
     <>
       <div>
         <NavBar />
-        <header className="flex align-items mx-12 p-4">
+        <header className="flex align-items sm:mx-12 p-4">
           <Search />
           <div className="flex-grow"></div>
           <Profile />
         </header>
-        <main className="container-lg mx-12 p-4">{children}</main>
+        <main className="container-lg sm:mx-12 p-4">{children}</main>
       </div>
     </>
   );
