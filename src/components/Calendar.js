@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
 
@@ -19,13 +19,13 @@ const MONTH_NAMES = [
 const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
 const INITIAL_EVENTS = [
   {
-    event_date: new Date(2021, 3, 10),
+    event_date: new Date(2021, 4, 10),
     event_title: 1560,
     event_theme: "green",
   },
 
   {
-    event_date: new Date(2021, 3, 16),
+    event_date: new Date(2021, 4, 16),
     event_title: 589,
     event_theme: "red",
   },
@@ -39,10 +39,9 @@ const Calendar = () => {
   const [noOfDays, setNoOfDays] = useState([]);
   const [blankDays, setBlankDays] = useState([]);
 
-  const getNoOfDays = () => {
-    let daysInMonth = new Date(year, month + 1, 0).getDate();
+  const getNoOfDays = useCallback(() => {
+    let daysInMonth = new Date(year, month, 0).getDate();
 
-    // find where to start calendar day of week
     let dayOfWeek = new Date(year, month).getDay();
     let blankdaysArray = [];
     for (let i = 1; i <= dayOfWeek; i++) {
@@ -56,9 +55,13 @@ const Calendar = () => {
 
     setBlankDays(blankdaysArray);
     setNoOfDays(daysArray);
-  };
+  }, [year, month]);
 
   const showEventModal = (date) => {};
+
+  useEffect(() => {
+    getNoOfDays();
+  }, [getNoOfDays]);
 
   return (
     <div className="antialiased sans-serif">

@@ -15,8 +15,8 @@ const Incomes = () => {
 
   return (
     <MainLayout>
-      <h2 className="px-6">Ingresos</h2>
-      <p className="px-6">Adiciona y chequea tus ingresos</p>
+      <h2 className="px-6">Ingresos y Gastos</h2>
+      <p className="px-6">Adiciona y chequea tus ingresos y gastos mensuales</p>
       <Calendar />
     </MainLayout>
   );
