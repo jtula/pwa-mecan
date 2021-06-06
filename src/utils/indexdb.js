@@ -25,6 +25,7 @@ class IndexedDb {
                 store.createIndex("by_createdAt", ["createdAt", "user"], {
                   unique: true,
                 });
+                store.createIndex("by_user", "user");
               }
             }
           });
@@ -42,8 +43,13 @@ class IndexedDb {
     return result;
   }
 
-  async getValueFromIndex(tableName, indexName = "createdAt", date) {
-    const result = await this.db.getFromIndex(tableName, indexName, date);
+  async getValueFromIndex(tableName, indexName = "user", value) {
+    const result = await this.db.getFromIndex(tableName, indexName, value);
+    return result;
+  }
+
+  async getAllValuesFromIndex(tableName, indexName = "user", value) {
+    const result = await this.db.getAllFromIndex(tableName, indexName, value);
     return result;
   }
 
