@@ -29,6 +29,12 @@ const INITIAL_EVENTS = [
     event_title: 589,
     event_theme: "red",
   },
+
+  {
+    event_date: new Date(2021, 5, 16),
+    event_title: 589,
+    event_theme: "green",
+  },
 ];
 
 const Calendar = () => {
@@ -40,10 +46,10 @@ const Calendar = () => {
   const [blankDays, setBlankDays] = useState([]);
 
   const getNoOfDays = useCallback(() => {
-    let daysInMonth = new Date(year, month, 0).getDate();
-
-    let dayOfWeek = new Date(year, month).getDay();
+    let daysInMonth = new Date(year, month + 1, 0).getDate();
+    let dayOfWeek = new Date(year, month + 1).getDay();
     let blankdaysArray = [];
+
     for (let i = 1; i <= dayOfWeek; i++) {
       blankdaysArray.push(i);
     }
