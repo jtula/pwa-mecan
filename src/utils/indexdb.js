@@ -11,15 +11,23 @@ class IndexedDb {
     try {
       this.db = await openDB(this.database, 1, {
         upgrade(db) {
-          for (const tableName of tableNames) {
-            if (db.objectStoreNames.contains(tableName)) {
-              continue;
+          tableNames.forEach((table) => {
+            if (!db.objectStoreNames.contains(table.name)) {
+              if (table.autoIncrement) {
+                db.createObjectStore(table.name, {
+                  autoIncrement: true,
+                  keyPath: "id",
+                });
+              } else {
+                const store = db.createObjectStore(table.name, {
+                  keyPath: ["createdAt", "user"],
+                });
+                store.createIndex("by_createdAt", ["createdAt", "user"], {
+                  unique: true,
+                });
+              }
             }
-            db.createObjectStore(tableName, {
-              autoIncrement: true,
-              keyPath: "id",
-            });
-          }
+          });
         },
       });
     } catch (error) {
@@ -31,6 +39,11 @@ class IndexedDb {
     const tx = this.db.transaction(tableName, "readonly");
     const store = tx.objectStore(tableName);
     const result = await store.get(id);
+    return result;
+  }
+
+  async getValueFromIndex(tableName, indexName = "createdAt", date) {
+    const result = await this.db.getFromIndex(tableName, indexName, date);
     return result;
   }
 
