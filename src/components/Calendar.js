@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { getIncomesByUser } from "src/services/incomes";
+import useUser from "src/hooks/useUser";
 import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
+import NewIncomeHandler from "./NewIncomeHandler";
 
 const MONTH_NAMES = [
   "Enero",
@@ -17,33 +20,20 @@ const MONTH_NAMES = [
   "Diciembre",
 ];
 const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
-const INITIAL_EVENTS = [
-  {
-    event_date: new Date(2021, 4, 10),
-    event_title: 1560,
-    event_theme: "green",
-  },
-
-  {
-    event_date: new Date(2021, 4, 16),
-    event_title: 589,
-    event_theme: "red",
-  },
-
-  {
-    event_date: new Date(2021, 5, 16),
-    event_title: 589,
-    event_theme: "green",
-  },
-];
 
 const Calendar = () => {
-  const [today, setToday] = useState(new Date());
+  const { user } = useUser();
+  const [today] = useState(new Date());
   const [month, setMonth] = useState(today.getMonth());
-  const [year, setYear] = useState(today.getFullYear());
-  const [events, setEvents] = useState(INITIAL_EVENTS);
+  const [year] = useState(today.getFullYear());
+  const [openNewIncomeHandler, setOpenNewIncomeHandler] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(
+    `${year}-${month + 1}-${today.getDate()}`
+  );
+  const [checkForNewIncomes, setCheckForNewIncomes] = useState(false);
+  const [incomes, setIncomes] = useState([]);
+  const [expenses] = useState([]);
   const [noOfDays, setNoOfDays] = useState([]);
-  const [blankDays, setBlankDays] = useState([]);
 
   const getNoOfDays = useCallback(() => {
     let daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -59,15 +49,25 @@ const Calendar = () => {
       daysArray.push(i);
     }
 
-    setBlankDays(blankdaysArray);
     setNoOfDays(daysArray);
   }, [year, month]);
-
-  const showEventModal = (date) => {};
 
   useEffect(() => {
     getNoOfDays();
   }, [getNoOfDays]);
+
+  useEffect(() => {
+    getIncomesByUser(user.username).then(setIncomes);
+  }, [user, checkForNewIncomes]);
+
+  const showNewIncomeModal = (date) => {
+    setSelectedDate(date);
+    setOpenNewIncomeHandler(true);
+  };
+
+  const handleNewIncomes = () => {
+    setCheckForNewIncomes((prev) => !prev);
+  };
 
   return (
     <div className="antialiased sans-serif">
@@ -82,12 +82,18 @@ const Calendar = () => {
           />
           <CalendarBody
             days={DAYS}
-            blankdays={blankDays}
             noOfDays={noOfDays}
-            events={events}
+            incomes={incomes}
+            expenses={expenses}
             year={year}
             month={month}
-            showEventModal={showEventModal}
+            showNewIncomeModal={showNewIncomeModal}
+          />
+          <NewIncomeHandler
+            open={openNewIncomeHandler}
+            setOpen={setOpenNewIncomeHandler}
+            createdAt={selectedDate}
+            handleNewIncomes={handleNewIncomes}
           />
         </div>
       </div>
