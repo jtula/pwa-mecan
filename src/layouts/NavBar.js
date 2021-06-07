@@ -10,8 +10,8 @@ const NavBar = () => {
   const [open, setOpen] = useState(true);
   const [_, pushLocation] = useLocation();
 
-  const handleIncomeClick = () => {
-    pushLocation("/incomes");
+  const handleRouteOnClick = (route) => {
+    pushLocation(route);
   };
 
   return (
@@ -33,13 +33,13 @@ const NavBar = () => {
               <ViewGridIcon width="20" height="20" color="gray" />
             </button>
             <button
-              onClick={handleIncomeClick}
+              onClick={() => handleRouteOnClick("/incomes")}
               className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
             >
               <TrendingUpIcon width="23" height="23" color="gray" />
             </button>
             <button
-              onClick={handleIncomeClick}
+              onClick={() => handleRouteOnClick("/expenses")}
               className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
             >
               <ArrowDownIcon width="23" height="23" color="gray" />
