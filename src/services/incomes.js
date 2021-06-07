@@ -12,12 +12,22 @@ export const getIncomesByUser = async (user) => {
   return result;
 };
 
+export const getIncomesByDateAndUser = async (createdAt, user) => {
+  const result = await indexedDb.getValueFromIndex(
+    tableName,
+    "by_dateAndUser",
+    [createdAt, user]
+  );
+  return result;
+};
+
 export const add = async ({ income, user, createdAt }) => {
   const newIncome = { income, user, createdAt };
-  const result = await indexedDb.getValueFromIndex(tableName, "by_createdAt", [
-    createdAt,
-    user,
-  ]);
+  const result = await indexedDb.getValueFromIndex(
+    tableName,
+    "by_dateAndUser",
+    [createdAt, user]
+  );
 
   if (result) {
     newIncome.income += result.income;

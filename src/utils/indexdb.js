@@ -22,7 +22,7 @@ class IndexedDb {
                 const store = db.createObjectStore(table.name, {
                   keyPath: ["createdAt", "user"],
                 });
-                store.createIndex("by_createdAt", ["createdAt", "user"], {
+                store.createIndex("by_dateAndUser", ["createdAt", "user"], {
                   unique: true,
                 });
                 store.createIndex("by_user", "user");
