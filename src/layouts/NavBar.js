@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
+import {
+  ArrowDownIcon,
+  TrendingUpIcon,
+  ViewGridIcon,
+} from "@heroicons/react/outline";
 
 const NavBar = () => {
   const [open, setOpen] = useState(true);
@@ -25,23 +30,19 @@ const NavBar = () => {
         <div className="flex flex-grow py-10">
           <div>
             <button className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100">
-              <img
-                width="20"
-                height="20"
-                src="icons/grid.svg"
-                alt="dashboard"
-              />
+              <ViewGridIcon width="20" height="20" color="gray" />
             </button>
             <button
               onClick={handleIncomeClick}
               className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
             >
-              <img
-                width="20"
-                height="20"
-                src="icons/wallet_alt.svg"
-                alt="wallet"
-              />
+              <TrendingUpIcon width="23" height="23" color="gray" />
+            </button>
+            <button
+              onClick={handleIncomeClick}
+              className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
+            >
+              <ArrowDownIcon width="23" height="23" color="gray" />
             </button>
           </div>
         </div>
