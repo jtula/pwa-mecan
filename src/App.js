@@ -4,6 +4,7 @@ import { UserContextProvider } from "src/context/UserContext";
 import { Route, Switch } from "wouter";
 import Home from "src/pages/Home";
 import Incomes from "src/pages/Incomes";
+import Expenses from "src/pages/Expenses";
 import {
   OBJECT_STORE_USERS,
   OBJECT_STORE_INCOMES,
@@ -35,6 +36,7 @@ function App() {
         <Switch>
           <Route component={Home} path="/" />
           <Route component={Incomes} path="/incomes" />
+          <Route component={Expenses} path="/expenses" />
         </Switch>
       </div>
     </UserContextProvider>
