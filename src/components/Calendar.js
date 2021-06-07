@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { getIncomesByUser } from "src/services/incomes";
-import useUser from "src/hooks/useUser";
 import CalendarHeader from "./CalendarHeader";
 import CalendarBody from "./CalendarBody";
-import NewIncomeHandler from "./NewIncomeHandler";
 
 const MONTH_NAMES = [
   "Enero",
@@ -21,18 +18,10 @@ const MONTH_NAMES = [
 ];
 const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
 
-const Calendar = () => {
-  const { user } = useUser();
+const Calendar = ({ items, showNewItemModal }) => {
   const [today] = useState(new Date());
   const [month, setMonth] = useState(today.getMonth());
   const [year] = useState(today.getFullYear());
-  const [openNewIncomeHandler, setOpenNewIncomeHandler] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(
-    `${year}-${month + 1}-${today.getDate()}`
-  );
-  const [checkForNewIncomes, setCheckForNewIncomes] = useState(false);
-  const [incomes, setIncomes] = useState([]);
-  const [expenses] = useState([]);
   const [noOfDays, setNoOfDays] = useState([]);
 
   const getNoOfDays = useCallback(() => {
@@ -56,19 +45,6 @@ const Calendar = () => {
     getNoOfDays();
   }, [getNoOfDays]);
 
-  useEffect(() => {
-    getIncomesByUser(user.username).then(setIncomes);
-  }, [user, checkForNewIncomes]);
-
-  const showNewIncomeModal = (date) => {
-    setSelectedDate(date);
-    setOpenNewIncomeHandler(true);
-  };
-
-  const handleNewIncomes = () => {
-    setCheckForNewIncomes((prev) => !prev);
-  };
-
   return (
     <div className="antialiased sans-serif">
       <div className="container mx-auto px-4 py-5">
@@ -83,17 +59,10 @@ const Calendar = () => {
           <CalendarBody
             days={DAYS}
             noOfDays={noOfDays}
-            incomes={incomes}
-            expenses={expenses}
+            items={items}
             year={year}
             month={month}
-            showNewIncomeModal={showNewIncomeModal}
-          />
-          <NewIncomeHandler
-            open={openNewIncomeHandler}
-            setOpen={setOpenNewIncomeHandler}
-            createdAt={selectedDate}
-            handleNewIncomes={handleNewIncomes}
+            showNewItemModal={showNewItemModal}
           />
         </div>
       </div>
