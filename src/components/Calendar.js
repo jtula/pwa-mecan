@@ -18,7 +18,7 @@ const MONTH_NAMES = [
 ];
 const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
 
-const Calendar = ({ items, showNewItemModal }) => {
+const Calendar = ({ items, showNewItemModal, theme }) => {
   const [today] = useState(new Date());
   const [month, setMonth] = useState(today.getMonth());
   const [year] = useState(today.getFullYear());
@@ -63,6 +63,7 @@ const Calendar = ({ items, showNewItemModal }) => {
             year={year}
             month={month}
             showNewItemModal={showNewItemModal}
+            theme={theme}
           />
         </div>
       </div>

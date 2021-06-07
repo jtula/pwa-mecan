@@ -5,6 +5,7 @@ const CalendarBody = ({
   year,
   month,
   showNewItemModal,
+  theme,
 }) => {
   return (
     <div className="-mx-1 -mb-1">
@@ -39,7 +40,7 @@ const CalendarBody = ({
                 .map((itemFiltered, idx) => (
                   <div
                     key={idx}
-                    className={`w-full px-1 py-1 mr-1 rounded-lg cursor-pointer border bg-green-200`}
+                    className={`w-full px-1 py-1 mr-1 rounded-lg cursor-pointer border bg-${theme.color}-200`}
                     onClick={() =>
                       showNewItemModal(`${year}-${month + 1}-${day}`)
                     }
