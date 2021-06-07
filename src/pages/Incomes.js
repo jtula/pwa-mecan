@@ -6,6 +6,10 @@ import { useLocation } from "wouter";
 import { getIncomesByUser } from "src/services/incomes";
 import NewIncomeHandler from "src/components/NewIncomeHandler";
 
+const theme = {
+  color: "green",
+};
+
 const Incomes = () => {
   const today = new Date();
   const { user } = useUser();
@@ -39,7 +43,11 @@ const Incomes = () => {
     <MainLayout>
       <h2 className="px-6">Ingresos</h2>
       <p className="px-6">Adiciona y chequea tus ingresos mensuales</p>
-      <Calendar items={incomes} showNewItemModal={showNewItemModal} />
+      <Calendar
+        items={incomes}
+        showNewItemModal={showNewItemModal}
+        theme={theme}
+      />
       <NewIncomeHandler
         open={openNewIncomeHandler}
         setOpen={setOpenNewIncomeHandler}
