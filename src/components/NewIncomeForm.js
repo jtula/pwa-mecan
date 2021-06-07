@@ -2,12 +2,16 @@ import { Fragment, useState, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CurrencyDollarIcon } from "@heroicons/react/outline";
 
-const NewIncomeForm = ({ open, setOpen, handleSubmit, todayIncome }) => {
+const NewIncomeForm = ({
+  open,
+  setOpen,
+  handleSubmit,
+  createdAt,
+  todayIncome,
+}) => {
   const cancelButtonRef = useRef(null);
   const [income, setIncome] = useState(0);
-  const titleMsg = todayIncome
-    ? `Hoy has ingresado ${todayIncome}`
-    : "Hoy no has tenido ingresos";
+  const titleMsg = todayIncome ? `Acumulado: $${todayIncome}` : "";
 
   const handleIncome = (e) => {
     setIncome(e.target.value);
@@ -56,6 +60,7 @@ const NewIncomeForm = ({ open, setOpen, handleSubmit, todayIncome }) => {
                 onSubmit={(e) => {
                   e.preventDefault();
                   handleSubmit(income);
+                  setIncome(0);
                 }}
                 method="POST"
               >
@@ -85,7 +90,7 @@ const NewIncomeForm = ({ open, setOpen, handleSubmit, todayIncome }) => {
                           value={income}
                           onChange={handleIncome}
                           type="number"
-                          className="mx-auto appearance-none rounded relative block w-24 my-3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                          className="mx-auto appearance-none rounded relative block w-24 my-3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-green-500 focus:z-10 sm:text-sm"
                         />
                       </div>
                     </div>
@@ -101,7 +106,7 @@ const NewIncomeForm = ({ open, setOpen, handleSubmit, todayIncome }) => {
                   </button>
                   <button
                     type="button"
-                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
                     ref={cancelButtonRef}
                   >
