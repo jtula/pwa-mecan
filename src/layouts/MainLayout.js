@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Profile from "src/components/Profile";
 import Search from "src/components/Search";
 import NavBar from "./NavBar";
 
 export default function AppLayout({ children }) {
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-
   return (
     <>
       <div>
@@ -15,7 +13,7 @@ export default function AppLayout({ children }) {
           <div className="flex-grow"></div>
           <Profile />
         </header>
-        <main className="container-lg sm:mx-12 p-4">{children}</main>
+        <main className="container-lg sm:mx-12 pl-10">{children}</main>
       </div>
     </>
   );
