@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import Home from "src/pages/Home";
 import Incomes from "src/pages/Incomes";
 import Expenses from "src/pages/Expenses";
+import Reports from "src/pages/Reports";
 import {
   OBJECT_STORE_USERS,
   OBJECT_STORE_INCOMES,
@@ -37,6 +38,7 @@ function App() {
           <Route component={Home} path="/" />
           <Route component={Incomes} path="/incomes" />
           <Route component={Expenses} path="/expenses" />
+          <Route component={Reports} path="/dashboard" />
         </Switch>
       </div>
     </UserContextProvider>
