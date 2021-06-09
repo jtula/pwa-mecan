@@ -38,7 +38,6 @@ function App() {
           <Route component={Home} path="/" />
           <Route component={Incomes} path="/incomes" />
           <Route component={Expenses} path="/expenses" />
-          <Route component={Reports} path="/dashboard" />
         </Switch>
       </div>
     </UserContextProvider>

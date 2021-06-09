@@ -1,5 +1,4 @@
-import { useLocation } from "wouter";
-import MainLayout from "src/layouts/MainLayout";
+import React, { useLocation } from "wouter";
 import useUser from "src/hooks/useUser";
 import {
   DownloadIcon,
@@ -21,7 +20,7 @@ const Reports = () => {
   }
 
   return (
-    <MainLayout>
+    <>
       <h2 className="px-4">Panel de Control</h2>
       <p className="px-4 text-sm">Chequea toda tu información</p>
       <div className="px-4 flex flex-wrap justify-between sm:space-x-5">
@@ -53,7 +52,7 @@ const Reports = () => {
           </button>
         </div>
       </div>
-    </MainLayout>
+    </>
   );
 };
 
