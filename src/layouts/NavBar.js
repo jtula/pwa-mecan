@@ -29,7 +29,10 @@ const NavBar = () => {
         </div>
         <div className="flex flex-grow py-10">
           <div>
-            <button className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100">
+            <button
+              className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
+              onClick={() => handleRouteOnClick("/dashboard")}
+            >
               <ViewGridIcon width="20" height="20" color="gray" />
             </button>
             <button
