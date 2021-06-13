@@ -31,71 +31,71 @@ const LastMonths = () => {
           Filtrar
         </button>
       </div>
-      <div class="py-2 align-middle inline-block min-w-full">
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
-          <table class="min-w-full divide-y divide-gray-200">
+      <div className="py-2 align-middle inline-block min-w-full">
+        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
+          <table className="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
-                <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  <div class="flex cursor-pointer">
-                    <span class="mr-2">AÑO</span>
+                <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex cursor-pointer">
+                    <span className="mr-2">AÑO</span>
                   </div>
                 </th>
-                <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  <div class="flex cursor-pointer">
-                    <span class="mr-2">MES</span>
+                <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex cursor-pointer">
+                    <span className="mr-2">MES</span>
                   </div>
                 </th>
-                <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  <div class="flex cursor-pointer">
-                    <span class="mr-2">GANANCIA</span>
+                <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex cursor-pointer">
+                    <span className="mr-2">GANANCIA</span>
                   </div>
                 </th>
-                <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  <div class="flex cursor-pointer">
-                    <span class="mr-2">INGRESO</span>
+                <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex cursor-pointer">
+                    <span className="mr-2">INGRESO</span>
                   </div>
                 </th>
-                <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  <div class="flex cursor-pointer">
-                    <span class="mr-2">GASTO</span>
+                <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex cursor-pointer">
+                    <span className="mr-2">GASTO</span>
                   </div>
                 </th>
-                <th class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  <div class="flex cursor-pointer">
-                    <span class="mr-2">IMPUESTO 10%</span>
+                <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex cursor-pointer">
+                    <span className="mr-2">IMPUESTO 10%</span>
                   </div>
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-gray-200">
               <tr>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                   <p>2021</p>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
                   <p>03</p>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div class="flex text-green-500">
+                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                  <div className="flex text-green-500">
                     <ChevronUpIcon width="20" height="20" />
                     <p>$1254.00</p>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div class="flex text-blue-500">
+                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                  <div className="flex text-blue-500">
                     <ChevronUpIcon width="20" height="20" />
                     <p>$1254.00</p>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div class="flex text-red-500">
+                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                  <div className="flex text-red-500">
                     <ChevronDownIcon width="20" height="20" />
                     <p>$125.00</p>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div class="flex text-red-500">
+                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                  <div className="flex text-red-500">
                     <p>$12.50</p>
                   </div>
                 </td>
