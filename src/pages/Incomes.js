@@ -13,7 +13,7 @@ const theme = {
 const Incomes = () => {
   const today = new Date();
   const { user } = useUser();
-  const [_, pushLocation] = useLocation();
+  const pushLocation = useLocation()[1];
   const [incomes, setIncomes] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
     `${today.getFullYear}-${today.getMonth + 1}-${today.getDate()}`

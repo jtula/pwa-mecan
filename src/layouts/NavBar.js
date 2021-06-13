@@ -7,8 +7,8 @@ import {
 } from "@heroicons/react/outline";
 
 const NavBar = () => {
-  const [open, setOpen] = useState(true);
-  const [_, pushLocation] = useLocation();
+  const [open] = useState(true);
+  const pushLocation = useLocation()[1];
 
   const handleRouteOnClick = (route) => {
     pushLocation(route);
