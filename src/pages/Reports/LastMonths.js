@@ -48,17 +48,17 @@ const LastMonths = () => {
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   <div className="flex cursor-pointer">
-                    <span className="mr-2">GANANCIA</span>
+                    <span className="mr-2">GANANCIAS</span>
                   </div>
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   <div className="flex cursor-pointer">
-                    <span className="mr-2">INGRESO</span>
+                    <span className="mr-2">INGRESOS</span>
                   </div>
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   <div className="flex cursor-pointer">
-                    <span className="mr-2">GASTO</span>
+                    <span className="mr-2">GASTOS</span>
                   </div>
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">

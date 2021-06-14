@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useUser from "src/hooks/useUser";
 import MainLayout from "src/layouts/MainLayout";
 import Calendar from "src/components/Calendar";
+import useIsMountedRef from "src/hooks/useIsMountedRef";
 import { useLocation } from "wouter";
 import { getExpensesByUser } from "src/services/expenses";
 import NewExpenseHandler from "src/components/NewExpenseHandler";
@@ -14,6 +15,7 @@ const Expenses = () => {
   const today = new Date();
   const { user } = useUser();
   const pushLocation = useLocation()[1];
+  const isMountedRef = useIsMountedRef();
   const [expenses, setExpenses] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
     `${today.getFullYear}-${today.getMonth + 1}-${today.getDate()}`
@@ -22,8 +24,14 @@ const Expenses = () => {
   const [checkForNewExpenses, setCheckForNewExpenses] = useState(false);
 
   useEffect(() => {
-    if (user) getExpensesByUser(user.username).then(setExpenses);
-  }, [user, checkForNewExpenses]);
+    if (user) {
+      getExpensesByUser(user.username).then((response) => {
+        if (isMountedRef.current) {
+          setExpenses(response);
+        }
+      });
+    }
+  }, [user, checkForNewExpenses, isMountedRef]);
 
   const handleNewExpenses = () => {
     setCheckForNewExpenses((prev) => !prev);

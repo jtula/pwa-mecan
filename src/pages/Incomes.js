@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useUser from "src/hooks/useUser";
 import MainLayout from "src/layouts/MainLayout";
 import Calendar from "src/components/Calendar";
+import useIsMountedRef from "src/hooks/useIsMountedRef";
 import { useLocation } from "wouter";
 import { getIncomesByUser } from "src/services/incomes";
 import NewIncomeHandler from "src/components/NewIncomeHandler";
@@ -13,6 +14,7 @@ const theme = {
 const Incomes = () => {
   const today = new Date();
   const { user } = useUser();
+  const isMountedRef = useIsMountedRef();
   const pushLocation = useLocation()[1];
   const [incomes, setIncomes] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
@@ -22,8 +24,14 @@ const Incomes = () => {
   const [checkForNewIncomes, setCheckForNewIncomes] = useState(false);
 
   useEffect(() => {
-    if (user) getIncomesByUser(user.username).then(setIncomes);
-  }, [user, checkForNewIncomes]);
+    if (user) {
+      getIncomesByUser(user.username).then((response) => {
+        if (isMountedRef.current) {
+          setIncomes(response);
+        }
+      });
+    }
+  }, [user, checkForNewIncomes, isMountedRef]);
 
   const handleNewIncomes = () => {
     setCheckForNewIncomes((prev) => !prev);
