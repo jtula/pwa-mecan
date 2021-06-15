@@ -1,6 +1,6 @@
 import React from "react";
 
-const CalendarHeader = ({ months, month, year, setMonth, getNoOfDays }) => {
+const CalendarHeader = ({ months, month, year, setMonth, setYear }) => {
   return (
     <div className="flex items-center justify-between py-2 px-6">
       <div>
@@ -12,8 +12,14 @@ const CalendarHeader = ({ months, month, year, setMonth, getNoOfDays }) => {
           type="button"
           className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
           onClick={() => {
-            setMonth((p) => p - 1);
-            getNoOfDays();
+            setMonth((p) => {
+              if (!p) {
+                setYear((y) => y - 1);
+                return 11;
+              } else {
+                return p - 1;
+              }
+            });
           }}
         >
           <svg
@@ -35,8 +41,14 @@ const CalendarHeader = ({ months, month, year, setMonth, getNoOfDays }) => {
           type="button"
           className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1"
           onClick={() => {
-            setMonth((p) => p + 1);
-            getNoOfDays();
+            setMonth((p) => {
+              if (p === 11) {
+                setYear((y) => y + 1);
+                return 0;
+              } else {
+                return p + 1;
+              }
+            });
           }}
         >
           <svg

@@ -21,7 +21,7 @@ const DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
 const Calendar = ({ items, showNewItemModal, theme }) => {
   const [today] = useState(new Date());
   const [month, setMonth] = useState(today.getMonth());
-  const [year] = useState(today.getFullYear());
+  const [year, setYear] = useState(today.getFullYear());
   const [noOfDays, setNoOfDays] = useState([]);
 
   const getNoOfDays = useCallback(() => {
@@ -54,7 +54,7 @@ const Calendar = ({ items, showNewItemModal, theme }) => {
             month={month}
             year={year}
             setMonth={setMonth}
-            getNoOfDays={getNoOfDays}
+            setYear={setYear}
           />
           <CalendarBody
             days={DAYS}
