@@ -12,7 +12,7 @@ const Incomes = () => {
 
   useEffect(() => {
     getIncomesByUser(user.username).then((response) => {
-      if (isMountedRef.current) {
+      if (response && response.length > 1 && isMountedRef.current) {
         setIncomes(
           response.reduce((acc, el) => ({ value: acc.value + el.value }))
         );

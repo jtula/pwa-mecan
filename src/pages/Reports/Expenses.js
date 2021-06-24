@@ -12,7 +12,7 @@ const Expenses = () => {
 
   useEffect(() => {
     getExpensesByUser(user.username).then((response) => {
-      if (isMountedRef.current) {
+      if (response && response.length > 1 && isMountedRef.current) {
         setExpenses(
           response.reduce((acc, el) => ({ value: acc.value + el.value }))
         );
