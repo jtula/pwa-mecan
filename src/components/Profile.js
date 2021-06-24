@@ -9,7 +9,6 @@ const Profile = () => {
 
   return (
     <>
-      <div className="flex-grow"></div>
       <div>
         <div className="flex items-center shadow-sm rounded-md p-2">
           <button
