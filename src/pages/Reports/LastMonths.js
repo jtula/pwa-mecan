@@ -1,13 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useIsMountedRef from "src/hooks/useIsMountedRef";
+import useUser from "src/hooks/useUser";
+import { compileMonthlyData } from "src/utils/common";
+import { getIncomesByUser } from "src/services/incomes";
+import { getExpensesByUser } from "src/services/expenses";
+
 import {
   DownloadIcon,
   FilterIcon,
   PrinterIcon,
-  ChevronUpIcon,
-  ChevronDownIcon,
+  ArrowSmUpIcon,
+  ArrowSmDownIcon,
 } from "@heroicons/react/outline";
 
+const today = new Date();
+
 const LastMonths = () => {
+  const isMountedRef = useIsMountedRef();
+  const { user } = useUser();
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const [monthlyData, setMonthlyData] = useState([]);
+
+  useEffect(() => {
+    const getMonthlyData = async () => {
+      if (user) {
+        try {
+          const incomesByUser = await getIncomesByUser(user.username);
+          const expensesByUser = await getExpensesByUser(user.username);
+          const incomesMonthly = compileMonthlyData({
+            data: incomesByUser,
+            currentYear,
+          });
+          const expensesMonthly = compileMonthlyData({
+            data: expensesByUser,
+            currentYear,
+          });
+          const mergeByMonth = incomesMonthly.map((income) => {
+            const expense = expensesMonthly.find(
+              (expense) => expense.month === income.month
+            );
+            return {
+              year: income.year,
+              month: income.month,
+              income: income.value,
+              expense: (expense && expense.value) || 0,
+            };
+          });
+
+          if (isMountedRef.current) {
+            setMonthlyData(mergeByMonth);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    getMonthlyData();
+  }, [user, currentYear, isMountedRef]);
+
   return (
     <>
       <h5>Últimos meses</h5>
@@ -69,37 +120,39 @@ const LastMonths = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              <tr>
-                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <p>2021</p>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <p>03</p>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div className="flex text-green-500">
-                    <ChevronUpIcon width="20" height="20" />
-                    <p>$1254.00</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div className="flex text-blue-500">
-                    <ChevronUpIcon width="20" height="20" />
-                    <p>$1254.00</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div className="flex text-red-500">
-                    <ChevronDownIcon width="20" height="20" />
-                    <p>$125.00</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                  <div className="flex text-red-500">
-                    <p>$12.50</p>
-                  </div>
-                </td>
-              </tr>
+              {monthlyData.map((data) => (
+                <tr key={data.month}>
+                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                    <p>{data.year}</p>
+                  </td>
+                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                    <p>{data.month}</p>
+                  </td>
+                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                    <div className="flex text-green-500">
+                      <ArrowSmUpIcon width="20" height="20" />
+                      <p>{data.income - data.expense - data.income * 0.1}</p>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                    <div className="flex text-blue-500">
+                      <ArrowSmUpIcon width="20" height="20" />
+                      <p>{data.income}</p>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                    <div className="flex text-red-500">
+                      <ArrowSmDownIcon width="20" height="20" />
+                      <p>{data.expense}</p>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                    <div className="flex text-red-500">
+                      <p>{data.income * 0.1}</p>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
