@@ -11,6 +11,7 @@ const NewIncomeForm = ({
 }) => {
   const cancelButtonRef = useRef(null);
   const [income, setIncome] = useState(0);
+  const [receivable, setReceivable] = useState(false);
   const titleMsg = todayIncome ? `Acumulado: $${todayIncome}` : "";
 
   const handleIncome = (e) => {
@@ -59,8 +60,9 @@ const NewIncomeForm = ({
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  handleSubmit(income);
+                  handleSubmit({ income, receivable });
                   setIncome(0);
+                  setReceivable(false);
                 }}
                 method="POST"
               >
@@ -92,6 +94,16 @@ const NewIncomeForm = ({
                           type="number"
                           className="mx-auto appearance-none rounded relative block w-24 my-3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-green-500 focus:z-10 sm:text-sm"
                         />
+                        <input
+                          id="collect"
+                          className="items-center"
+                          type="checkbox"
+                          value={receivable}
+                          onChange={() => setReceivable((prev) => !prev)}
+                        />
+                        <label htmlFor="collect" className="px-1">
+                          Por cobrar
+                        </label>
                       </div>
                     </div>
                   </div>

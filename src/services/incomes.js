@@ -21,8 +21,8 @@ export const getIncomesByDateAndUser = async (createdAt, user) => {
   return result;
 };
 
-export const add = async ({ value, user, createdAt }) => {
-  const newIncome = { value, user, createdAt };
+export const add = async ({ value, user, createdAt, receivable }) => {
+  const newIncome = { value, receivable, user, createdAt };
   const result = await indexedDb.getValueFromIndex(
     tableName,
     "by_dateAndUser",

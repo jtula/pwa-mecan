@@ -6,9 +6,9 @@ import useUser from "src/hooks/useUser";
 const NewIncomeHandler = ({ open, setOpen, createdAt, handleNewIncomes }) => {
   const { user } = useUser();
   const [todayIncome, setTodayIncome] = useState(null);
-  const handleSubmit = (income) => {
+  const handleSubmit = ({ income, receivable }) => {
     const value = parseFloat(income);
-    add({ value, user: user.username, createdAt }).then((res) => {
+    add({ value, user: user.username, createdAt, receivable }).then((res) => {
       if (res === "ok") {
         handleNewIncomes();
       }
