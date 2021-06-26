@@ -5,10 +5,10 @@ import useUser from "src/hooks/useUser";
 
 const NewIncomeHandler = ({ open, setOpen, createdAt, handleNewIncomes }) => {
   const { user } = useUser();
-  const [todayIncome, setTodayIncome] = useState(null);
-  const handleSubmit = ({ income, receivable }) => {
+  const [savedIncome, setSavedIncome] = useState(null);
+  const handleSubmit = ({ income, isReceivable }) => {
     const value = parseFloat(income);
-    add({ value, user: user.username, createdAt, receivable }).then((res) => {
+    add({ value, user: user.username, createdAt, isReceivable }).then((res) => {
       if (res === "ok") {
         handleNewIncomes();
       }
@@ -18,9 +18,9 @@ const NewIncomeHandler = ({ open, setOpen, createdAt, handleNewIncomes }) => {
   useEffect(() => {
     getIncomesByDateAndUser(createdAt, user.username).then((res) => {
       if (res) {
-        setTodayIncome(res.value);
+        setSavedIncome(res);
       } else {
-        setTodayIncome(0);
+        setSavedIncome(null);
       }
     });
   }, [createdAt, user, open]);
@@ -31,7 +31,7 @@ const NewIncomeHandler = ({ open, setOpen, createdAt, handleNewIncomes }) => {
       setOpen={setOpen}
       createdAt={createdAt}
       handleSubmit={handleSubmit}
-      todayIncome={todayIncome}
+      savedIncome={savedIncome}
     />
   );
 };

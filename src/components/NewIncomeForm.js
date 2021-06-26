@@ -7,12 +7,11 @@ const NewIncomeForm = ({
   setOpen,
   handleSubmit,
   createdAt,
-  todayIncome,
+  savedIncome,
 }) => {
   const cancelButtonRef = useRef(null);
   const [income, setIncome] = useState(0);
-  const [receivable, setReceivable] = useState(false);
-  const titleMsg = todayIncome ? `Acumulado: $${todayIncome}` : "";
+  const [isReceivable, setIsReceivable] = useState(false);
 
   const handleIncome = (e) => {
     setIncome(e.target.value);
@@ -60,9 +59,9 @@ const NewIncomeForm = ({
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  handleSubmit({ income, receivable });
+                  handleSubmit({ income, isReceivable });
                   setIncome(0);
-                  setReceivable(false);
+                  setIsReceivable(false);
                 }}
                 method="POST"
               >
@@ -82,8 +81,16 @@ const NewIncomeForm = ({
                         Adicionar Ingreso
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">{titleMsg}</p>
-
+                        {savedIncome && savedIncome.value && (
+                          <p className="text-sm text-gray-500">
+                            Acumulado: {savedIncome.value}
+                          </p>
+                        )}
+                        {savedIncome && savedIncome.receivable !== 0 && (
+                          <p className="text-sm text-gray-500">
+                            Por cobrar: {savedIncome.receivable}
+                          </p>
+                        )}
                         <input
                           id="income"
                           name="income"
@@ -98,11 +105,11 @@ const NewIncomeForm = ({
                           id="collect"
                           className="items-center"
                           type="checkbox"
-                          value={receivable}
-                          onChange={() => setReceivable((prev) => !prev)}
+                          value={isReceivable}
+                          onChange={() => setIsReceivable((prev) => !prev)}
                         />
                         <label htmlFor="collect" className="px-1">
-                          Por cobrar
+                          Cuenta por cobrar
                         </label>
                       </div>
                     </div>
