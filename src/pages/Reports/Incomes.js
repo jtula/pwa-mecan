@@ -24,7 +24,7 @@ const Incomes = () => {
     <DashboardCard
       title={"Ingresos"}
       icon={<ArrowUpIcon width="25" height="25" color="#42a5f5" />}
-      value={`$${incomes.value}`}
+      value={`$${incomes.value || 0}`}
     />
   );
 };
