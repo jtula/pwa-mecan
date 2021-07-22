@@ -14,17 +14,17 @@ const navConfig = [
     icon: ViewGridIcon,
   },
   {
-    title: "Incomes",
+    title: "Ingresos",
     href: "/incomes",
     icon: TrendingUpIcon,
   },
   {
-    title: "Expenses",
+    title: "Gastos",
     href: "/expenses",
     icon: ArrowDownIcon,
   },
   {
-    title: "Companies",
+    title: "Empresas",
     href: "/companies",
     icon: OfficeBuildingIcon,
   },
