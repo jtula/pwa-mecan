@@ -4,7 +4,31 @@ import {
   ArrowDownIcon,
   TrendingUpIcon,
   ViewGridIcon,
+  OfficeBuildingIcon,
 } from "@heroicons/react/outline";
+
+const navConfig = [
+  {
+    title: "Inicio",
+    href: "/",
+    icon: ViewGridIcon,
+  },
+  {
+    title: "Incomes",
+    href: "/incomes",
+    icon: TrendingUpIcon,
+  },
+  {
+    title: "Expenses",
+    href: "/expenses",
+    icon: ArrowDownIcon,
+  },
+  {
+    title: "Companies",
+    href: "/companies",
+    icon: OfficeBuildingIcon,
+  },
+];
 
 const NavBar = () => {
   const [open] = useState(true);
@@ -12,6 +36,19 @@ const NavBar = () => {
 
   const handleRouteOnClick = (route) => {
     pushLocation(route);
+  };
+
+  const renderNavItems = ({ item }) => {
+    const Icon = item.icon;
+
+    return (
+      <button
+        className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
+        onClick={() => handleRouteOnClick(item.href)}
+      >
+        <Icon width="23" height="23" color="gray" />
+      </button>
+    );
   };
 
   return (
@@ -28,26 +65,7 @@ const NavBar = () => {
           </Link>
         </div>
         <div className="flex flex-grow py-10">
-          <div>
-            <button
-              className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
-              onClick={() => handleRouteOnClick("/")}
-            >
-              <ViewGridIcon width="20" height="20" color="gray" />
-            </button>
-            <button
-              onClick={() => handleRouteOnClick("/incomes")}
-              className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
-            >
-              <TrendingUpIcon width="23" height="23" color="gray" />
-            </button>
-            <button
-              onClick={() => handleRouteOnClick("/expenses")}
-              className="inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100"
-            >
-              <ArrowDownIcon width="23" height="23" color="gray" />
-            </button>
-          </div>
+          <div>{navConfig.map((item) => renderNavItems({ item }))}</div>
         </div>
         <div className="pb-5 -inset-y-0">
           <button className="inset-y-0 inline-flex items-center justify-center w-10 h-10 ml-1 transition-colors duration-150 rounded-full focus:outline-none focus:ring-0 focus:shadow-outline hover:bg-gray-100">
